@@ -1,4 +1,4 @@
-package repository;
+package com.atos.webapp.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -8,14 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import configuration.CustomProperties;
+import com.atos.webapp.configuration.CustomProperties;
+import com.atos.webapp.model.Employee;
+
 import lombok.extern.slf4j.Slf4j;
-import model.Employee;
+
 
 
 @Slf4j
 @Component
-public class EmployeeProxy {
+public class EmployeeRepository {
 	@Autowired
 	private CustomProperties props;
 	

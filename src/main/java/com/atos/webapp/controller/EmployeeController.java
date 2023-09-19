@@ -1,4 +1,4 @@
-package controller;
+package com.atos.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.atos.webapp.model.Employee;
+import com.atos.webapp.service.EmployeeService;
+
 import lombok.Data;
-import model.Employee;
-import service.EmployeeService;
 
 
 
@@ -25,7 +26,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 	
-	@GetMapping("/")
+	@GetMapping("/employees")
 	public String home(Model model) {
 		Iterable<Employee> listEmployee = service.getEmployees();
 		model.addAttribute("employees", listEmployee);

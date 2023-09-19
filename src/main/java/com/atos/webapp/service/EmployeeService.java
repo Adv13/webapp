@@ -1,29 +1,31 @@
-package service;
+package com.atos.webapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atos.webapp.model.Employee;
+import com.atos.webapp.repository.EmployeeRepository;
+
 import lombok.Data;
-import model.Employee;
-import repository.EmployeeProxy;
+
 
 @Data
 @Service
 public class EmployeeService {
 
 	@Autowired
-	private EmployeeProxy employeeProxy;
+	private EmployeeRepository employeeRepository;
 	
 	public Employee getEmployee(final int id) {
-		return employeeProxy.getEmployee(id);
+		return employeeRepository.getEmployee(id);
 	}
 	
 	public Iterable<Employee> getEmployees() {
-		return employeeProxy.getEmployees();
+		return employeeRepository.getEmployees();
 	}
 	
 	public void deleteEmployee(final int id) {
-		employeeProxy.deleteEmployee(id);
+		employeeRepository.deleteEmployee(id);
 	}
 	
 	public Employee saveEmployee(Employee employee) {
@@ -34,9 +36,9 @@ public class EmployeeService {
 
 		if(employee.getId() == null) {
 			// If id is null, then it is a new employee.
-			savedEmployee = employeeProxy.createEmployee(employee);
+			savedEmployee = employeeRepository.createEmployee(employee);
 		} else {
-			savedEmployee = employeeProxy.updateEmployee(employee);
+			savedEmployee = employeeRepository.updateEmployee(employee);
 		}
 		
 		return savedEmployee;
