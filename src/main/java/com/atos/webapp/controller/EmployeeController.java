@@ -29,13 +29,14 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 	
-	@GetMapping
+	@GetMapping("/")
 	@JsonView(EmployeeViews.AllEmployees.class)
 	public String home(Model model) {
 		final Iterable<Employee> listEmployee = service.getEmployees();
 		model.addAttribute("employees", listEmployee);
 		return "home";
 	}
+	
 	
 	@GetMapping("/createEmployee")
 	@JsonView(EmployeeViews.OneEmployee.class)
