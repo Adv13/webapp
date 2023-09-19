@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.atos.webapp.configuration.CustomProperties;
+import com.atos.webapp.controller.EmployeeViews;
 import com.atos.webapp.model.Employee;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,20 +28,21 @@ public class EmployeeRepository {
 	 * Get all employees
 	 * @return An iterable of all employees
 	 */
+	@JsonView(EmployeeViews.AllEmployees.class)
 	public Iterable<Employee> getEmployees() {
 
-		String baseApiUrl = props.getApiUrl();
-		String getEmployeesUrl = baseApiUrl + "/employees";
+		final String baseApiUrl = props.getApiUrl();
+		final String getEmployeesUrl = baseApiUrl + "/employees";
 
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Iterable<Employee>> response = restTemplate.exchange(
+		final RestTemplate restTemplate = new RestTemplate();
+		final ResponseEntity<Iterable<Employee>> response = restTemplate.exchange(
 				getEmployeesUrl, 
 				HttpMethod.GET, 
 				null,
 				new ParameterizedTypeReference<Iterable<Employee>>() {}
 			);
 		
-		log.debug("Get Employees call " + response.getStatusCode().toString());
+		log.debug("Get Employees call {}", response.getStatusCode().toString());
 		
 		return response.getBody();
 	}
